@@ -7,15 +7,15 @@ import { ThemeProvider } from './contexts/ThemeContext';
 import { AuthProvider } from './contexts/AuthContext';
 
 // 组件与页面导入
-import { Layout } from './components/Layout';
-import { Home } from './pages/Home';
-import { Gallery } from './pages/Gallery';
-import { DetailPage } from './pages/DetailPage';
-import { PhotoWall } from './pages/PhotoWall';
-import { Login } from './pages/Login';
-import { Dashboard } from './pages/admin/Dashboard';
-import { BookEditor } from './pages/admin/BookEditor';
-import { Profile } from './pages/admin/Profile';
+import { Layout } from '../components/Layout';
+import { Home } from '../pages/Home';
+import { Gallery } from '../pages/Gallery';
+import { DetailPage } from '../pages/DetailPage';
+import { PhotoWall } from '../pages/PhotoWall';
+import { Login } from '../pages/Login';
+import { Dashboard } from '../pages/admin/Dashboard';
+import { BookEditor } from '../pages/admin/BookEditor';
+import { Profile } from '../pages/admin/Profile';
 
 /**
  * 优化重点：
