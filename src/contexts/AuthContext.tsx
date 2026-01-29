@@ -1,7 +1,11 @@
 import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
 import { api } from '../lib/api';
-import { User } from '../../types';
-
+export interface User {
+    id: string;
+    email: string;
+    name?: string;
+    role?: string;
+}
 interface AuthContextType {
     user: User | null;
     loading: boolean;
