@@ -37,9 +37,19 @@ export const DetailPage: React.FC = () => {
       );
    }
 
+   // Debug logging
+   useEffect(() => {
+      if (book) {
+         console.log('Book data loaded:', book);
+         console.log('Pages type:', typeof book.pages, Array.isArray(book.pages));
+      }
+   }, [book]);
+
    if (!book) return <div className="p-20 text-center">Book not found</div>;
 
-   const allImages = [book.coverUrl || book.cover_url, ...(book.pages || [])];
+   // Safely handle pages
+   const safePages = Array.isArray(book.pages) ? book.pages : [];
+   const allImages = [book.coverUrl || book.cover_url, ...safePages].filter(Boolean);
    const isLightboxOpen = lightboxIndex >= 0;
 
    // Keyboard navigation for lightbox
@@ -149,13 +159,13 @@ export const DetailPage: React.FC = () => {
                   </div>
 
                   {/* Pages Grid */}
-                  {book.pages && book.pages.length > 0 && (
+                  {safePages.length > 0 && (
                      <div className="space-y-4">
                         <h3 className={`text-xs font-bold uppercase tracking-widest flex items-center gap-2 ${theme === 'vintage' ? 'text-vintage-accent' : 'text-slate-400'}`}>
-                           Inside the Book <span className="px-2 py-0.5 bg-slate-100 rounded-full text-[10px] text-slate-600">{book.pages.length} Pages</span>
+                           Inside the Book <span className="px-2 py-0.5 bg-slate-100 rounded-full text-[10px] text-slate-600">{safePages.length} Pages</span>
                         </h3>
                         <div className="grid grid-cols-3 sm:grid-cols-4 gap-4">
-                           {book.pages.map((page, idx) => (
+                           {safePages.map((page, idx) => (
                               <div
                                  key={idx}
                                  className={`relative aspect-square overflow-hidden cursor-pointer group transition-all duration-300 ${theme === 'vintage'
@@ -175,7 +185,7 @@ export const DetailPage: React.FC = () => {
                      </div>
                   )}
 
-                  {!book.pages?.length && (
+                  {!safePages.length && (
                      <div className="p-8 text-center bg-slate-50 rounded-lg text-slate-400 italic text-sm border border-dashed border-slate-200">
                         No additional pages available for this preview.
                      </div>
@@ -206,7 +216,7 @@ export const DetailPage: React.FC = () => {
 
                   {/* Read/Purchase Buttons */}
                   <div className="space-y-3 mt-auto">
-                     {book.pages && book.pages.length > 0 && (
+                     {safePages.length > 0 && (
                         <button
                            onClick={() => setLightboxIndex(0)}
                            className={`w-full py-3.5 text-center text-sm font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 ${theme === 'vintage'
