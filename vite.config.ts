@@ -3,12 +3,9 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/',
+  base: './', // 改为相对路径，这是 Vercel 解决 404 的“万能药”
   build: {
-    // 确保打包产物符合 Vercel 预期
     outDir: 'dist',
     assetsDir: 'assets',
-    // 自动注入 CSS
-    cssCodeSplit: true,
   }
 })
